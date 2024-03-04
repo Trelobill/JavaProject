@@ -59,6 +59,7 @@ public class Main{
             System.out.println("Wind Speed: " + wind_speed_Kmph);
             System.out.println("UV Index: " + uv_index);
             System.out.println("Weather Description: " + weather_Desc);
+            System.out.println("Weather Description: " + weather_Desc);
             Database.insertNewWeatherSearch(city, new Timestamp(System.currentTimeMillis()), temp_c, humidity, wind_speed_Kmph, uv_index, weather_Desc);
         } catch (Exception e) {
             e.printStackTrace();
