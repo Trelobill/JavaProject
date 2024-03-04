@@ -55,6 +55,7 @@ public class Main{
             String weather_Desc = current_condition.getAsJsonArray("weatherDesc").get(0).getAsJsonObject().get("value").getAsString();
             System.out.println(current_condition);
             System.out.println("Temperature: " + temp_c);
+            System.out.println("Temperature: " + temp_c);
             System.out.println("Humidity: " + humidity);
             System.out.println("Wind Speed: " + wind_speed_Kmph);
             System.out.println("UV Index: " + uv_index);
