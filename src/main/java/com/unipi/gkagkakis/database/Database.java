@@ -1,5 +1,7 @@
 package com.unipi.gkagkakis.database;
 
+import com.unipi.gkagkakis.Main;
+
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,9 +41,9 @@ public class Database{
             ResultSet resultSet = statement.executeQuery(checkTableExistsSQL);
             if (!resultSet.next()) {
                 statement.executeUpdate(createTableSQL);
-                System.out.println("Table created successfully...");
+                System.out.println(Main.CYAN + Main.ITALIC + "Database table created successfully...");
             } else {
-                System.out.println("Table already exists...");
+                System.out.println(Main.CYAN + Main.ITALIC + "Database table already exists...");
             }
             statement.close();
             connection.close();
@@ -64,7 +66,7 @@ public class Database{
             preparedStatement.setString(7, weather_desc);
             int count = preparedStatement.executeUpdate();
             if (count > 0) {
-                System.out.println("1 new weather search inserted...");
+                System.out.println(Main.CYAN + Main.ITALIC + "\n1 new weather search inserted into the database...");
             }
             preparedStatement.close();
             connection.close();

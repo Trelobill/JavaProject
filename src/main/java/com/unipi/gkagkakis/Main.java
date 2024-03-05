@@ -15,18 +15,31 @@ import java.util.Scanner;
 
 public class Main{
     static Scanner scanner = new Scanner(System.in);
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String ORANGE = "\u001B[38;5;208m";
+    public static final String BOLD = "\u001B[1m";
+    public static final String UNDERLINE = "\u001B[4m";
+    public static final String ITALIC = "\u001B[3m";
 
     public static void main(String[] args){
         Database.createTable();
         while (true) {
             displayMenu();
             String option = scanner.nextLine();
-            makePOSTRequest(option);
+            String formattedOption = option.replaceAll("\\s+", "+");
+            makePOSTRequest(formattedOption);
         }
     }
 
     private static void displayMenu(){
-        System.out.println("\n\033[1;92mWelcome to our weather app!\nPlease give a city for more info!");
+        System.out.println("\n" + BLUE + BOLD + ITALIC + UNDERLINE + "Welcome to our weather app! \nPlease enter a city to get detailed weather information!");
+        System.out.print("\n" + RESET + BOLD + PURPLE + "City Name: " + RESET);
+
     }
 
     public static void makePOSTRequest(String city){
@@ -53,17 +66,17 @@ public class Main{
             String wind_speed_Kmph = current_condition.get("windspeedKmph").getAsString() + " km/h";
             int uv_index = current_condition.get("uvIndex").getAsInt();
             String weather_Desc = current_condition.getAsJsonArray("weatherDesc").get(0).getAsJsonObject().get("value").getAsString();
-            System.out.println(current_condition);
-            System.out.println("Temperature: " + temp_c);
-            System.out.println("Temperature: " + temp_c);
-            System.out.println("Humidity: " + humidity);
-            System.out.println("Wind Speed: " + wind_speed_Kmph);
-            System.out.println("UV Index: " + uv_index);
-            System.out.println("Weather Description: " + weather_Desc);
-            System.out.println("Weather Description: " + weather_Desc);
+            String country = jsonObject.getAsJsonArray("nearest_area").get(0).getAsJsonObject().get("country").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
+            System.out.println(ITALIC + CYAN + "\nFound a city in country: " + ORANGE + BOLD + country + RESET + ITALIC + CYAN + ".");
+            System.out.println("If it's wrong, please try typing the country next to city name!\n");
+            System.out.println(RED + "Temperature: " + YELLOW + temp_c);
+            System.out.println(RED + "Humidity: " + YELLOW + humidity);
+            System.out.println(RED + "Wind Speed: " + YELLOW + wind_speed_Kmph);
+            System.out.println(RED + "UV Index: " + YELLOW + uv_index);
+            System.out.println(RED + "Weather Description: " + YELLOW + weather_Desc);
             Database.insertNewWeatherSearch(city, new Timestamp(System.currentTimeMillis()), temp_c, humidity, wind_speed_Kmph, uv_index, weather_Desc);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(RED + BOLD + "An error occurred while processing the request. Please try again!");
         }
     }
 }
