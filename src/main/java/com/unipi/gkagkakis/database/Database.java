@@ -1,6 +1,6 @@
 package com.unipi.gkagkakis.database;
 
-import com.unipi.gkagkakis.Main;
+import com.unipi.gkagkakis.main.Main;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -22,12 +22,6 @@ public class Database{
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-//            String deleteSQL = "DROP TABLE PRODUCT";
-//            statement.executeUpdate(deleteSQL);
-//            deleteSQL = "DELETE FROM PRODUCT";
-//            statement.executeUpdate(deleteSQL);
-//            deleteSQL = "DELETE FROM sqlite_sequence WHERE name = 'PRODUCT'";
-//            statement.executeUpdate(deleteSQL);
             String createTableSQL = "CREATE TABLE IF NOT EXISTS WEATHER_INFO"
                     + "(AA INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "TOWN VARCHAR(30) NOT NULL,"
@@ -41,9 +35,13 @@ public class Database{
             ResultSet resultSet = statement.executeQuery(checkTableExistsSQL);
             if (!resultSet.next()) {
                 statement.executeUpdate(createTableSQL);
-                System.out.println(Main.CYAN + Main.ITALIC + "Database table created successfully...");
+                System.out.println(Main.BOLD + Main.YELLOW + "\n------------------DEBUG LOG------------------");
+                System.out.println("Database table created successfully...");
+                System.out.println("--------------------------------------------");
             } else {
-                System.out.println(Main.CYAN + Main.ITALIC + "Database table already exists...");
+                System.out.println(Main.BOLD + Main.YELLOW + "------------------DEBUG LOG------------------");
+                System.out.println("Database table already exists...");
+                System.out.println("---------------------------------------------");
             }
             statement.close();
             connection.close();
@@ -66,7 +64,9 @@ public class Database{
             preparedStatement.setString(7, weather_desc);
             int count = preparedStatement.executeUpdate();
             if (count > 0) {
-                System.out.println(Main.CYAN + Main.ITALIC + "\n1 new weather search inserted into the database...");
+                System.out.println(Main.BOLD + Main.YELLOW + "\n---------------------DEBUG LOG---------------------");
+                System.out.println("1 new weather search inserted into the database...");
+                System.out.println("---------------------------------------------------");
             }
             preparedStatement.close();
             connection.close();
