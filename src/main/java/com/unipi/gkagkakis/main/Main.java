@@ -33,6 +33,7 @@ public class Main{
         GUIorConsole();
     }
 
+    //συναρτηση που τρεχει συνεχεια αν δωσω terminal app
     private static void displayMenu(){
         Database.createTable();
         System.out.println("\n" + BLUE + BOLD + ITALIC + UNDERLINE + "Welcome to our terminal weather app! \nPlease enter a city to get detailed weather information!");
@@ -44,6 +45,7 @@ public class Main{
         }
     }
 
+    //στην αρχη ο χρηστης διαλεγει αν θελει GUI ή console app
     private static void GUIorConsole(){
         System.out.println("\n" + BLUE + BOLD + "Press 1 for GUI or 2 for terminal app!");
         String option = scanner.nextLine();
@@ -63,6 +65,8 @@ public class Main{
         }
     }
 
+    //γινεται το request για τα data μεσω json
+    //χειρισμος και επιστροφη τιμων
     public static Map<String, String> makePOSTRequest(String city, boolean terminal){
         Map<String, String> weatherData = new HashMap<>();
         try {

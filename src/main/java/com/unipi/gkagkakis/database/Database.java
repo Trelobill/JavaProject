@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 public class Database{
     public static Connection connect(){
+        //ονομα βασης: weather_app
         String connectionString = "jdbc:sqlite:weather_app.db";
         Connection connection = null;
         try {
@@ -18,6 +19,7 @@ public class Database{
         return connection;
     }
 
+    //δημιουργια table στην βαση
     public static void createTable(){
         try {
             Connection connection = connect();
@@ -33,6 +35,7 @@ public class Database{
                     + "WEATHER_DESC TEXT NOT NULL)";
             String checkTableExistsSQL = "SELECT name FROM sqlite_master WHERE type='table' AND name='WEATHER_INFO'";
             ResultSet resultSet = statement.executeQuery(checkTableExistsSQL);
+            //αν υπαρχει ηδη το table δεν κανει τιποτα αλλιω το δημιουργει
             if (!resultSet.next()) {
                 statement.executeUpdate(createTableSQL);
                 System.out.println(Main.BOLD + Main.YELLOW + "\n------------------DEBUG LOG------------------");
@@ -50,6 +53,7 @@ public class Database{
         }
     }
 
+    //συναρτηση για insert του search που εγινε
     public static void insertNewWeatherSearch(String town, Timestamp timestamp, String temp_c, String humidity, String wind_speed_kmph, Integer uv_index, String weather_desc){
         try {
             Connection connection = connect();

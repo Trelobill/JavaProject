@@ -20,6 +20,7 @@ public class GUI extends JFrame{
     private JButton searchButton;
 
     public GUI(){
+        //τιτλος application
         setTitle("WeatherApp");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(MainPanel);
@@ -28,6 +29,7 @@ public class GUI extends JFrame{
         setVisible(true);
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
+        //listener για οταν παταω enter α πατιεται το Search Button
         textField.addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e){
@@ -42,6 +44,7 @@ public class GUI extends JFrame{
                 }
             }
         });
+        //Λειτουργια button αναλογα το input που δωσαμε
         searchButton.addActionListener(e -> {
             String text = textField.getText();
             if (text.isEmpty()) {
@@ -55,6 +58,7 @@ public class GUI extends JFrame{
         });
     }
 
+    //εμφανιζει τα data στο app
     private void handleData(Map<String, String> weatherData){
         if (weatherData.containsKey("Error")) {
             System.out.println(weatherData.get("Error"));
@@ -68,6 +72,7 @@ public class GUI extends JFrame{
         }
     }
 
+    //αρχικοποιηση πεδιων αν δωσω κενο input
     private void setLabelsToDefault(){
         countryArea.setText("----");
         temperatureArea.setText("----");
