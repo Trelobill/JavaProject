@@ -1,5 +1,6 @@
 package com.unipi.gkagkakis.main;
 
+import com.unipi.gkagkakis.GUI.GUI;
 import com.unipi.gkagkakis.database.Database;
 
 import java.sql.Timestamp;

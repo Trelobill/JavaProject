@@ -1,4 +1,6 @@
-package com.unipi.gkagkakis.main;
+package com.unipi.gkagkakis.GUI;
+
+import com.unipi.gkagkakis.main.Main;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
