@@ -64,6 +64,7 @@ public class Main{
             String temp_c = current_condition.get("temp_C").getAsString() + " °C";
             String humidity = current_condition.get("humidity").getAsString() + " %";
             String wind_speed_Kmph = current_condition.get("windspeedKmph").getAsString() + " km/h";
+            String wind_speed_Kmph1 = current_condition.get("windspeedKmph").getAsString() + " km/h";
             int uv_index = current_condition.get("uvIndex").getAsInt();
             String weather_Desc = current_condition.getAsJsonArray("weatherDesc").get(0).getAsJsonObject().get("value").getAsString();
             String country = jsonObject.getAsJsonArray("nearest_area").get(0).getAsJsonObject().get("country").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
